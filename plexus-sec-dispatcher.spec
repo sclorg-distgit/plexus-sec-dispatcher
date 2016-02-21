@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.4
-Release:        13.10%{?dist}
+Release:        13.11%{?dist}
 Summary:        Plexus Security Dispatcher Component
 
 License:        ASL 2.0
@@ -16,15 +16,15 @@ Source0:        %{pkg_name}-%{version}.tar.bz2
 BuildArch: noarch
 
 BuildRequires: %{?scl_prefix_java_common}maven-local
-BuildRequires: maven30-maven-plugin-plugin
-BuildRequires: maven30-maven-resources-plugin
-BuildRequires: maven30-plexus-utils
-BuildRequires: maven30-plexus-cipher
-BuildRequires: maven30-plexus-containers-component-metadata
+BuildRequires: %{?scl_prefix}maven-plugin-plugin
+BuildRequires: %{?scl_prefix}maven-resources-plugin
+BuildRequires: %{?scl_prefix}plexus-utils
+BuildRequires: %{?scl_prefix}plexus-cipher
+BuildRequires: %{?scl_prefix}plexus-containers-component-metadata
 BuildRequires: %{?scl_prefix_java_common}junit
-BuildRequires: maven30-forge-parent
-BuildRequires: maven30-spice-parent
-BuildRequires: maven30-maven-surefire-provider-junit
+BuildRequires: %{?scl_prefix}forge-parent
+BuildRequires: %{?scl_prefix}spice-parent
+BuildRequires: %{?scl_prefix}maven-surefire-provider-junit
 
 %description
 Plexus Security Dispatcher Component
@@ -38,7 +38,7 @@ API documentation for %{pkg_name}.
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 
 # annotations are not available for Java 1.4, remove definition
@@ -66,13 +66,13 @@ sed -i '/maven-compiler-plugin/ {
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_build
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -83,6 +83,9 @@ set -e -x
 %files javadoc -f .mfiles-javadoc
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.4-13.11
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 1.4-13.10
 - maven33 rebuild
 
