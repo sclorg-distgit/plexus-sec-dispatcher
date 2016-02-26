@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.4
-Release:        13.11%{?dist}
+Release:        13.12%{?dist}
 Summary:        Plexus Security Dispatcher Component
 
 License:        ASL 2.0
@@ -15,7 +15,7 @@ Source0:        %{pkg_name}-%{version}.tar.bz2
 
 BuildArch: noarch
 
-BuildRequires: %{?scl_prefix_java_common}maven-local
+BuildRequires: %{?scl_prefix}maven-local
 BuildRequires: %{?scl_prefix}maven-plugin-plugin
 BuildRequires: %{?scl_prefix}maven-resources-plugin
 BuildRequires: %{?scl_prefix}plexus-utils
@@ -83,6 +83,9 @@ set -e -x
 %files javadoc -f .mfiles-javadoc
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 1.4-13.12
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.4-13.11
 - maven33 rebuild #2
 
